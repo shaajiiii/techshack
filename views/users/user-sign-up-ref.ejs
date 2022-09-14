@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head.ejs')%>
+
+    <body>
+        <!-- login page -->
+
+        <link rel="stylesheet" href="/styles/login_style.css">
+
+
+        <a class="mx-5" href="#"><img style="height: 50px;margin-top: 10px !important;" src="/images/TechShackLogo.png"
+                alt=""> </a>
+
+        <!-- ///////////////// -->
+
+        <div class="container-fluid">
+            <div class="row">
+
+
+                <div class="form mt-5  col-xs-12 col-sm-12 col-md-8 col-lg-5 " style=" background: rgba(0, 0, 0, 0.4);
+                box-shadow: 0 15px 20px rgb(0 0 0 / 20%);">
+                    <div class="form-toggle"></div>
+                    <div class="form-panel one">
+                        <div class="form-header">
+                            <h1>Referral user registation from <%= refName %> </h1>
+                        </div>
+                        <div class="form-content">
+                            <!-- Login form // login enn oru route ind userlogin il-->
+                            <form action="/user-sign-up/signup/ref" method="post" id="signup-form">
+                                <div class="form-group">
+                                    <label for="username" style="color:  #ffffff;">Username</label>
+                                    <input style="color: white" type="text" id="usernameId" name="username" />
+                                    <input hidden value="<%= refName %>" style="color: white" type="text" id="refNameId" name="refName" />
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label for="username" style="color:  #ffffff;">Email</label>
+                                    <input style="color: white" type="email" id="emailId" name="email" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" style="color:  #ffffff;">Password</label>
+                                    <input style="color: white" type="password" id="passwordId" name="password" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" style="color:  #ffffff;">Mobile</label>
+                                    <input style="color: white" type="text" id="mobileId" name="mobile" />
+                                </div>
+
+
+                                <% if (signUpError) { %>
+
+                                    <p style="color: red;"> <small> The email you entered already exists </small></p>
+
+                                    <% } %>
+                                        <div class="form-group">
+                                            <button style="color: black" type="submit">Register</button>
+                                        </div>
+                            </form>
+                            <!-- login form end -->
+                        </div>
+                    </div>
+
+
+
+
+                    <!-- register form was here -->
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .error {
+
+                color: red !important;
+
+            }
+        </style>
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+
+
+
+
+        <script>
+
+            jQuery.validator.addMethod("letteronly", function (value, element) {
+                return this.optional(element) || /^[A-Za-z]+$/i.test(value);
+            }, "Letters only please");
+
+            jQuery('#signup-form').validate({
+
+
+                rules: {
+
+                    username: {
+
+                        required: true,
+                        letteronly:true
+
+
+
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+
+                        required: true,
+                        minlength: 4,
+
+                    },
+                    mobile: {
+                        required: true,
+                        digits: true,
+                        minlength:10,
+                        maxlength:10
+                    }
+
+
+                },
+                messages: {
+                    username: {
+                        required: "Please provide a username",
+
+                    },
+                    email: "You need to enter a valid email address",
+                    password: {
+                        required: "enter a password please",
+                        minlength: "atleast 4 characters needed"
+                    },
+                    mobile: {
+                        required: "A valid mobile number is required",
+                        minlength:"please enter a valid mobile number",
+                        maxlength:"please enter a valid mobile number"
+                    }
+                }
+
+            })
+
+
+
+
+
+        </script>
+
+
+
+
+    </body>
+
+</html>

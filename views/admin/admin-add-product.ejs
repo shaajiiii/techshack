@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/admin-head.ejs')%>
+
+  <body>
+
+
+    <!-- admin page with ADD PRODUCT FORM -->
+
+    <%- include('../partials/admin-navbar.ejs')%>
+      <!-- NAV END -->
+
+
+      
+     
+
+    <section style="color: #fff;">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-8">
+            <h2 class="text-center"> Add product</h2>
+
+            <form action="/admin/add-product" method="post" enctype="multipart/form-data">
+
+              <label class="mt-2" for="">Product name</label>
+              <input type="text" name="name" class="form-control">
+
+              <label class="mt-2" for="">Brand</label>
+              <input type="text" name="brand" class="form-control">
+
+              <% if(categories){ %> 
+                
+                
+
+                  <% if(categories.length == 0){ %> 
+
+                    <label class="mt-2" for="">Category</label>
+                    <input type="text" name="category" class="form-control">
+
+                  <%  }else{ %>
+
+                    <!-- the radio inputs of categories -->
+
+                        
+                    <label class="mt-2 mb-1" for="">Category</label>
+
+                    <div class="row" style="padding: 1rem;border-radius: 20px">
+
+                    <% for(i=0;i<categories.length;i++){ %> 
+
+
+                      <% if(i==0){ %> 
+
+                        <div class="col-md-2" >
+                          <input class="form-check-input" type="radio" name="category" value="<%= categories[i].name   %>" checked>
+                          <label class="form-check-label" >
+                            <%= categories[i].name %> 
+                          </label>
+                        </div>
+
+
+                      <%  }else{ %>
+
+                        <div class="col-md-2" >
+                          <input class="form-check-input" type="radio" name="category" value="<%= categories[i].name   %>">
+                          <label class="form-check-label" >
+                            <%= categories[i].name %> 
+                          </label>
+                        </div>
+
+
+                      <%  } %>
+                   
+
+                    <%  } %>
+
+                  </div>
+
+
+                     <!-- the radio inputs of categories  end /-->
+
+
+
+                  <%  } %>
+
+                  
+
+              <%  } else{ %> 
+
+                <label class="mt-2" for="">Category</label>
+                <input type="text" name="category" class="form-control">
+
+
+              <%  } %>
+
+
+           
+
+
+              
+              <label class="mt-2" for="">Price</label>
+              <input type="number" name="price" class="form-control">
+              
+              <label class="mt-2" for="">description</label>
+              <input type="text" name="description" class="form-control">
+
+              <label class="mt-2" for="">Image</label>
+              <input type="file" name="image" class="form-control">
+
+
+              <button type="submit" class="btn btn-success mt-4">submit</button>
+
+
+
+
+            </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+     
+
+
+
+
+
+
+        
+        
+
+
+         
+
+      </div>
+
+    </section>
+
+
+
+    <style>
+     
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+
+</html>

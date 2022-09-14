@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/admin-head.ejs')%>
+
+  <body>
+
+
+    <!-- admin page with ADD PRODUCT FORM -->
+
+    <%- include('../partials/admin-navbar.ejs')%>
+      <!-- NAV END -->
+
+
+      
+     
+
+    <section style="color: #fff;">
+      <div class="container">
+        <div class="row">
+
+          <div class="d-flex justify-content-center">
+
+
+            <div class="col-md-8 mt-4 col-12">
+              <h2 class="text-center"> Add new Coupon </h2>
+  
+              <form action="/admin/add-coupon" method="post" enctype="multipart/form-data">
+  
+                
+                <input type="text" name="code" placeholder="Enter coupon code" class="form-control mt-3" required>
+                <input type="number" name="percent" placeholder=" off percent" class="form-control mt-3" required>
+  
+              
+  
+               
+  
+                <a href="/admin/coupons" class="btn btn-light mt-4" style="margin-left: auto;">cancel</a>
+  
+  
+                <button type="submit" style="float: right;" class="btn btn-info mt-4"> Confirm</button>
+  
+  
+  
+  
+              </form>
+  
+  
+  
+  
+  
+            </div>
+
+
+
+
+          </div>
+
+
+          
+
+
+
+        </div>
+
+
+     
+
+
+
+         
+
+      </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+
+</html>

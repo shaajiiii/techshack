@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs')%>
+
+    <body>
+        <!-- home page with products -->
+
+        <%- include('./partials/navbar.ejs')%>
+            <!-- product card css -->
+            <link rel="stylesheet" href="/styles/productCardStyle.css">
+
+
+
+
+
+
+            <% if(banners){ %> 
+            
+      <!-- corosall -->
+
+     
+
+      </div>
+
+        <div id="carouselExampleInterval" class="carousel slide mt-5" data-bs-ride="carousel" >
+            <div class="carousel-inner">
+
+                <!-- trying dynamic rendering -->
+
+               
+
+                <% for(i=0;i<banners.length;i++){ %>
+
+                    <% if (i==0){ %> 
+
+                        <div class="carousel-item active" data-bs-interval="3000">
+                            <img src="/images/banners/<%- banners[i]._id %>.jpg" class="d-block w-100" alt="...">
+                        </div>
+
+
+
+                    <% } else {  %> 
+
+
+
+                        <div class="carousel-item" data-bs-interval="3000">
+                            <img src="/images/banners/<%- banners[i]._id %>.jpg" class="d-block w-100" alt="...">
+                          </div>
+
+
+                    <% } %> 
+   
+
+                <% } %>
+
+
+               
+  
+            </div>
+  
+  
+  
+  
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+
+        
+  
+  
+  
+  
+   <!-- CORAUSAL END -->
+  
+
+
+   <% } else{ %>
+
+     <!-- did this else case because i dont have any time to spent one this rught now ,, made a copy and set the opacity to 0 for fixin the ui -->
+
+    
+
+   </div>
+
+   <div id="carouselExampleInterval" class="carousel slide mt-5" data-bs-ride="carousel" style="opacity: 0;">
+       <div class="carousel-inner">
+
+
+
+    </div>
+  
+  
+  
+  
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+
+
+         <!-- add the filter things here.. -->
+        
+            
+
+
+
+
+
+
+        <!-- filyer things -->
+
+        
+
+
+
+
+
+
+    <% } %>
+
+
+
+
+
+    <% if(products.length==0){ %>
+
+       
+            <div class="d-flex justify-content-center mt-5">
+
+                    
+               <img class="" src="/images/icons/sad-box.png" style="height: 20rem;" alt=""> 
+                       
+            </div>
+            <h3 class="display-4 text-center"> Nothing Found on it !</h3>
+
+
+
+    <% } %> 
+
+
+
+
+
+
+
+
+
+            <!-- product cards -->
+            <section>
+                <div class="container" style="margin-top:50px;" >
+                    <div class="row">
+
+                       
+
+
+                            <!-- dont touch the product card -->
+
+
+                        <% products.forEach((element)=> { %>
+
+
+                            <!-- card -->
+                            <div class="col-12 col-md-3">
+                                <div class="card-sl">
+
+
+                                    <% if(userLoggedIn) {%>
+
+                                          <!--    -->
+
+
+
+                                                                                  
+                                        <% let tempwlID=null; %> 
+                                        <% let ProID = element._id; %> 
+                                        <% let InWishlist=false; %> 
+
+                                      
+
+                                        <% wishlistProducts.forEach(wlPro => { %>
+
+                                            <%   tempwlID = wlPro.product[0]._id;  // not equal to oru case polum kittanilla  %>
+                                            
+                                            <% if( JSON.stringify(ProID)===JSON.stringify(tempwlID)) { %>
+                                                
+                                                <% InWishlist= true;  %> 
+
+                                            <% } %>
+
+
+
+                                             
+                                            
+                                           
+                                         <%  }); %>
+
+
+
+
+                                         <% if( InWishlist) { %>
+
+                                            <button class="heart-like-button liked"
+                                            onclick="wishListFunction('<%- element._id %>')"
+                                             style="background-color: #1e1e1e00;border: none;">
+                                            </button>
+                                                
+                                           
+
+                                        <% } else { %>
+
+
+                                          <button class="heart-like-button "
+                                          onclick="wishListFunction('<%- element._id %>')"
+                                           style="background-color: #1e1e1e00;border: none;">
+                                          </button>
+
+
+                                        <% } %> 
+
+  
+
+                                                                   
+                                       
+                                        <!--    -->
+                                        
+
+
+                                    <%   } %>
+
+
+                                          
+
+
+
+
+                                            <a href="/single-product-view/<%=element._id%>" class="card-image">
+                                                <img src="/product-images/<%=element._id%>.png" height="" width="">
+
+                                            </a>
+
+
+                                            <div class="card-heading">
+                                                <%=element.name%>
+                                            </div>
+                                            <!-- <div class="card-text">
+                                     took away the description.. too long tile
+                                </div> -->
+
+                                            <% if(!element.offer){ %> 
+
+                                            <div class="card-text" style="font-size: 20px;">
+                                                
+                                                ₹ <%=element.price%>  <br> <sup>&nbsp;</sup>
+                                            </div>
+
+                                            <% } else { %> 
+
+                                                
+                                            <div class="card-text" style="font-size: 20px;">
+                                                
+                                                ₹ <%=element.price%> <small class="old-price"><s> ₹ <%=element.mrp%> </s></small> <br>  <sup> <span class="off"> <%=element.offerPercent%>% off </span></sup> 
+                                            </div>
+
+                                            <% } %> 
+
+
+
+
+                                            <!-- purchase button -->
+                                            <% if(userLoggedIn){ %>
+                                                <!-- <a href="/add-to-cart/ element._id " class="card-button"> Add to cart</a> -->
+                                                <button class="card-button" onclick="addToCart('<%- element._id %>' )">
+                                                    Add to cart</button>
+                                                <% } %>
+
+
+                                </div>
+                            </div>
+
+
+
+
+                            <!-- card end -->
+
+
+
+
+                            <% }) %>
+
+
+
+
+
+                                <!-- product cards end -->
+
+
+                                <!-- j query link -->
+
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+                                <!-- heart script -->
+                                <script>
+                                    const button = document.querySelectorAll(".heart-like-button");
+                                    button.forEach(element => {
+                                        element.wishListFunction = (proId) => {
+                                            if (element.classList.contains("liked")) {
+                                                element.classList.remove("liked");
+                                                console.log("they Not  liked aayy")
+                                                $.ajax({
+                                                    url: '/remove-from-wishlist/' + proId,
+                                                    method: 'get',
+                                                    success: (resp) => {
+                                                        if (resp.status) {
+                                                            // $("#tile").load(" #tile");// relaoding just the div
+                                                            // $("#summaryBox").load(" #summaryBox");// relaoding just the div
+                                                            $('#wishlist-count').html(resp.wishlistCount)// reloading the badge
+                                                            // $('#navbarScroll').load(' #navbarScroll')
+                                                        }
+
+
+                                                    }
+
+                                                })
+
+                                            } else {
+                                                element.classList.add("liked");
+                                                console.log("they liked aayy")
+
+
+                                                $.ajax({
+                                                    url: '/add-to-wishlist/' + proId,
+                                                    method: 'get',
+                                                    success: (resp) => {
+                                                        if (resp.status) {
+
+                                                            $('#wishlist-count').html(resp.wishlistCount) // updates the cart label with the count in cart
+                                                            $('#navbarScroll').load(' #navbarScroll')
+
+                                                        }
+                                                    }
+
+                                                })
+
+
+
+                                            }
+                                        };
+
+                                    });
+
+
+
+                                    function addToCart(proId) {
+
+                                        $.ajax({
+                                            url: '/add-to-cart/' + proId,
+                                            method: 'get',
+                                            success: (resp) => {
+                                                if (resp.status) {
+
+                                                    $('#cart-count').html(resp.cartCount) // updates the cart label with the count in cart
+                                                    $('#navbarScroll').load(' #navbarScroll')
+
+                                                }
+                                            }
+
+                                        })
+
+
+
+                                    }
+
+                                </script>
+
+
+
+
+                                <!-- <script>
+===================> change of plans,, going to that with a page render.
+
+        $("#accending").click(function(){
+         console.log('accening clicked') 
+         let filter = "accending"
+         console.log(filter);
+         
+         
+         
+          
+            // $.ajax({url: theURL, success: function(result){
+            //     // $("#div1").html(result); deccending
+            // }});
+        });
+
+        $("#deccending").click(function(){
+         console.log('deccending clicked') 
+         let filter = "deccending";
+         console.log(filter)
+         
+          
+            // $.ajax({url: theURL, success: function(result){
+            //     // $("#div1").html(result); deccending
+            // }});
+        }); -->
+
+
+    
+
+                                </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <!-- temp style -->
+                                <style>
+                                    body {
+                                        background-color: #121212;
+                                        color: white;
+                                        background-image: url('/images/bg2.jpg');
+                                        background-repeat: no-repeat;
+                                        background-attachment: fixed;  
+                                        background-size: cover;
+
+                                    }
+                                    .old-price{
+                                        color: rgb(99, 99, 99);
+                                        font-size: smaller;
+                                        margin-left: 3px;
+                                        margin-bottom: -10px;
+                                    }
+                                    .off{
+                                        background-color: green;
+                                        border-radius: 20px;
+                                        padding-left: 5px;
+                                        padding-right: 5px;
+                                        font-size: x-small;
+                                        
+                                       
+                                    }
+
+
+
+                                    /* label */
+
+
+
+
+                                </style>
+
+
+
+
+
+
+    </body>
+
+</html>

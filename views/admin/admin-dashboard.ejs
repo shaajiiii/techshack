@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/admin-head.ejs')%>
+
+  <body>
+
+
+    <!-- home page with USERS LIST -->
+
+    <%- include('../partials/admin-navbar.ejs')%>
+      <!-- NAV END -->
+
+
+
+
+
+
+      <section >
+
+
+        <div class="container py-5">
+
+          <div class="row d-flex justify-content-center my-4">
+
+
+
+            <div class="row">
+              <div class="col-12">
+
+                <h1 style="color: white;float: left;"> Dashboard</h1>
+
+              </div>
+            </div>
+
+
+            <!-- heading end -->
+
+
+
+
+
+            <div class="col-md-3 " style="color:white">
+              <h3>&nbsp;</h3>
+
+
+              <div class="card mb-4" style=" background-color:#042141;border-radius: 10px;">
+
+                <div class="card-header py-3" style="border: solid 1px #042141;border-radius: 10px;height: 7rem;">
+
+
+                  <h5 class="mb-0 mt-3" style="text-align: center;"> Total Users <img style="float: right;"
+                      src="/images/icons/man.png" alt="" height="40px"><br>
+                    <%= cards.users %> 
+                  </h5>
+
+
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+
+
+            <div class="col-md-3 " style="color:white">
+              <h3>&nbsp;</h3>
+
+
+              <div class="card mb-4" style=" background-color:#042141;border-radius: 10px;">
+
+                <div class="card-header py-3" style="border: solid 1px #042141;border-radius: 10px;height: 7rem;">
+
+
+                  <h5 class="mb-0 mt-3" style="text-align: center;"> Pending Orders <img style="float: right;"
+                      src="/images/icons/clock.png" alt="" height="40px"><br>
+                      <%= cards.pendingOrders %> 
+                  </h5>
+
+
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+
+
+
+
+            <div class="col-md-3" style="color:white">
+              <h3>&nbsp;</h3>
+
+
+              <div class="card mb-4" style=" background-color:#042141;border-radius: 10px;">
+
+                <div class="card-header py-3" style="border: solid 1px #042141;border-radius: 10px;height: 7rem;">
+
+
+                  <h5 class="mb-0 mt-3" style="text-align: center;"> Delivered orders <img style="float: right;"
+                      src="/images/icons/greenshipped.png" alt="" height="50px"><br>
+                      <%= cards.deliveredOrders %> 
+                  </h5>
+
+
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+
+
+
+            <div class="col-md-3" style="color:white">
+              <h3>&nbsp;</h3>
+
+
+              <div class="card mb-4" style=" background-color:#042141;border-radius: 10px;">
+
+                <div class="card-header py-3" style="border: solid 1px #042141;border-radius: 10px;height: 7rem;">
+
+
+                  <h5 class="mb-0 mt-3" style="text-align: center;"> Cancel requests <img style="float: right;"
+                      src="/images/icons/alert.png" alt="" height="40px"><br>
+                      <%= cards.cancelledOrders %> 
+                  </h5>
+
+
+
+                </div>
+
+              </div>
+
+
+            </div>
+
+
+            <!-- charts -->
+
+
+
+            <div class="col-md-6">
+              <canvas id="myChart" class="chart-tile" style="width:100%;max-width:600px"></canvas>
+
+            </div>
+
+
+            <div class="col-md-6">
+              <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+            </div>
+
+
+            <!-- charts -->
+
+
+            <div class="col-md-8" style="color:white">
+              <h3>&nbsp;</h3>
+
+
+              <div class="card mb-4" style=" background-color:#042141;border-radius: 10px;">
+
+                <div class="card-header py-3" style="border: solid 1px #042141;border-radius: 10px;height: 7rem;">
+
+
+                  <h5 class="mb-0 mt-3" style="text-align: center;"> Total Revenue <img style="float: right;"
+                      src="/images/icons/money.png" alt="" height="60px"><br>
+                      ₹ <%= cards.sales %> 
+                  </h5>
+
+
+
+                </div>
+
+              </div>
+
+
+            </div>
+
+
+
+
+
+            <div class="col-md-4" style="color:white">
+              <h3>&nbsp;</h3>
+
+
+              <div class="card mb-4" style=" background-color:#042141;border-radius: 10px;">
+
+                <div class="card-header py-3" style="border: solid 1px #042141;border-radius: 10px;height: 7rem;">
+
+
+                  <h5 class="mb-0 mt-3" style="text-align: center;"> No of products in store <img style="float: right;"
+                      src="/images/icons/products.png" alt="" height="60px"><br>
+                      <%= cards.products %> 
+                  </h5>
+
+
+
+                </div>
+
+              </div>
+
+
+            </div>
+
+
+            <div class="col-12">
+              <a href="/admin/sales-report" type="button" class="col-12 btn btn-success">Download sales report</a>
+            </div>
+
+
+
+
+          </div>
+        </div>
+      </section>
+
+       
+      
+      <script>
+
+   
+
+        // data given to graph
+
+      const COD = parseInt('<%= paymentsData.COD %>');
+      const PAYPAL = parseInt('<%= paymentsData.PAYPAL %>');
+      const RAZOR = parseInt('<%= paymentsData.RAZOR %>');
+
+      const day1 = parseInt('<%= weekData.day1 %>');
+      const day2 = parseInt('<%= weekData.day2 %>');
+      const day3 = parseInt('<%= weekData.day3 %>');
+      const day4 = parseInt('<%= weekData.day4 %>');
+      const day5 = parseInt('<%= weekData.day5 %>');
+      const day6 = parseInt('<%= weekData.day6 %>');
+      const day7 = parseInt('<%= weekData.day7 %>');
+
+      
+  
+      
+
+    
+      
+      </script>
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+
+      </script>
+
+      <script>
+
+         
+       
+
+
+        
+        
+
+        var xValues = ["COD", "Razorpay", "Paypal"];
+        var yValues = [COD, RAZOR, PAYPAL];
+        var barColors = [
+          "#FF6961",
+          "#77DD77",
+          "#6CA0DC"
+        ];
+        Chart.defaults.global.defaultFontColor = "#fff";
+
+
+        new Chart("myChart", {
+          type: "doughnut",
+          data: {
+            labels: xValues,
+            datasets: [{
+              backgroundColor: barColors,
+              data: yValues
+            }]
+          },
+          options: {
+            title: {
+              display: true,
+              text: "Preffered Payment Method",
+
+            }
+          }
+        });
+
+
+
+
+        var x2Values = ["6d ago", "5d ago", "4d ago", "3d ago", "2d ago", "Yesterday", "Today"];
+        var y2Values = [day1, day2, day3, day4, day5, day6, day7];
+        var barColors = ["red", "green", "blue", "orange","yellow","purple","skyblue"];
+
+        new Chart("myChart2", {
+          type: "bar",
+          data: {
+            labels: x2Values,
+            datasets: [{
+              backgroundColor: barColors,
+              data: y2Values
+            }]
+          },
+          options: {
+            legend: { display: false },
+            title: {
+              display: true,
+              text: "Past one week's sale"
+            }
+          }
+        });
+
+
+
+        // var x3Values = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+
+        // new Chart("myChart3", {
+        //   type: "line",
+        //   data: {
+        //     labels: x3Values,
+        //     datasets: [{
+        //       data: [300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100],
+        //       borderColor: "green",
+        //       fill: false
+        //     }]
+        //   },
+        //   options: {
+        //     legend: { display: false }
+        //   }
+        // });
+
+
+
+
+      </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <style>
+        .chart-tile {
+
+          background-color: #042141;
+          border-radius: 10px;
+          padding: 2rem;
+        }
+      </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+
+</html>

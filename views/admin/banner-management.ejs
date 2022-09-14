@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/admin-head.ejs')%>
+
+  <body>
+
+
+    <!-- home page with USERS LIST -->
+
+    <%- include('../partials/admin-navbar.ejs')%>
+      <!-- NAV END -->
+      
+
+      <div class="row p-5">
+        <div class="container">
+
+          <a href="/admin/add-banner" class="btn btn-light" style="position:absolute;">Add new banner</a>
+
+
+          <% banners.forEach((el)=>{ %>
+
+            
+          <div class="col-12 text-center mt-2 mb-5" >
+            <h1 class="display-4 " style="color: white;"> <%= el.bannerName  %> </h1>
+            <div class="box">
+
+              <button title="Click here to delete the banner" onclick="deleteBanner('<%- el._id %>')" type="button" class="btn btn-danger mt-5  but" style="position:absolute;right: 8vw;" > Delete </button>
+
+              <img src="/images/banners/<%=el._id%>.jpg" class="d-block w-100" alt="..." style="border-radius: 5rem;">
+
+            
+
+            </div>
+            
+
+          </div>
+
+
+
+          <% }) %> 
+
+  
+
+        </div>
+
+        
+
+
+      </div>
+
+
+
+
+
+        
+
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+      <script type="text/javascript">
+        function deleteBanner(eId) {
+          route = "/admin/delete-banner/";
+          targetURL = route + eId;
+
+          Swal.fire({
+            title: 'Are you sure you want to delete this banner?',
+            background: '#1E1E1E',
+            color: '#fff',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes I want to delete this banner!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+
+              Swal.fire({
+                title: 'deleted!',
+                text: 'The banner has been deleted.',
+                background: "#1E1E1E",
+                color: '#fff',
+                icon: 'success'
+              }
+              ).then(() => {
+                console.log("===================")
+
+                console.log(targetURL)
+                console.log(eId)
+
+                window.location.href = targetURL;// the req
+
+              })
+
+
+            }
+          })
+
+
+
+
+        }
+      </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <style>
+
+        .box:hover .but{
+          opacity: 1;
+        }
+
+        .but{
+          border-radius: 4rem;
+          opacity:0 ;
+          transition: opacity .35s ease;
+          
+        }
+ 
+      </style>
+
+
+
+
+
+
+
+
+  </body>
+
+</html>

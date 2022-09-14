@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/head.ejs')%>
+
+  <body>
+    <!-- home page with products -->
+
+    <%- include('../partials/navbar.ejs')%>
+      <!-- product card css -->
+      <link rel="stylesheet" href="/styles/productCardStyle.css">
+      <script src="https://kit.fontawesome.com/6a3d932f86.js" crossorigin="anonymous"></script>
+      <section style="padding-top: 2rem ;">
+        <div class="container py-5">
+          <div class="row d-flex justify-content-center my-4">
+            <div class="col-md-8">
+              <div class="card mb-4" style="background-color:#1E1E1E">
+                <div class="card-header py-3" style="border-bottom: solid 1px rgb(67, 67, 67);">
+                  <h5 class="mb-0">Wishlist </h5>
+
+                </div>
+
+                <div class="card-body" id="tile">
+
+                  <% if(!wishlistCount){%>
+
+                    
+                    <div >
+
+
+                      <h6 class="mb-0" style="text-align: center;">
+                        <img src="/images/assets/wishlistcyan.png" alt="" style="height: 20rem;margin-bottom: 1rem; "><br>
+                        <span> Oops! Your wishlist looks empty </span></h6>
+
+
+                    </div>
+
+                   
+
+
+                    <% }%>
+
+
+
+                      <% wishlistProducts.forEach((element)=> { %>
+
+                        <!-- Single item -->
+                        <div class="row pb-3 ">
+                          <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                            <!-- Image -->
+                            <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                            <a href="/single-product-view/<%=element.product[0]._id%>">
+                              <img src="/product-images/<%=element.product[0]._id%>.png" class="w-100" />
+                            </a>
+                            </div>
+                            <!-- Image -->
+                          </div>
+
+                          <div class="col-lg-5 col-md-6 mb-4 mb-lg-0 my-auto  ">
+                            <!-- Data -->
+                            <a href="/single-product-view/<%=element.product[0]._id%>"
+                              style="color: aliceblue;" >
+                          <div>
+                            <p><strong>
+                                <%=element.product[0].name%>
+                              </strong>
+                            </p>
+
+
+
+
+
+                            <p>
+                              <%=element.product[0].brand%>
+                            </p>
+
+                          </div> </a>
+
+
+
+
+
+
+                            <!-- <a href="/remove-cart-item/element.product[0]._id"></a>   ussed this first. now ajax-->
+
+                            <button onclick="removeFromWishlist('<%-element.product[0]._id%>')" type="button"
+                              class="btn  rounded-pill btn-sm me-1 mb-2 " data-mdb-toggle="tooltip" title="Remove item"
+                              style="color: white;">
+                              <i class="fas fa-trash"></i>
+                            </button>
+
+
+                           
+
+                            <!-- delete set aaakk  -->
+
+
+                            <!-- <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
+                                title="Move to the wish list">
+                                <i class="fas fa-heart"></i>
+                              </button> -->
+                            <!-- Data -->
+                          </div>
+
+                          <div class="col-lg-4 col-md-6 mb-4 mb-lg-0 mt-5 ">
+
+                            <!-- Price -->
+                            <p class="text-start text-md-center ">
+                              <strong> ₹ <%=element.product[0].price%> / unit</strong>
+                             
+                              
+                            </p>
+                            
+                              
+                            <div  style="display: flex;justify-content: center; margin-top: 4rem;">
+                              <button id="addToCart" class="btn col-12 col-md-6" 
+                                  style="float: right;"   onclick="addToCart('<%-element.product[0]._id%>')"> Add to cart 
+                              </button>
+
+
+                              
+                            </div>
+                              
+                            
+                            <!-- Price -->
+
+                          </div>
+                        </div>
+                        <!-- Single item -->
+                        <hr>
+
+
+                        <% }) %>
+
+
+
+
+                </div>
+              </div>
+
+
+            </div>
+
+
+
+
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+
+
+
+      <!-- product cards end -->
+
+
+
+
+
+
+
+
+      <!-- j query link -->
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+
+      <script>
+
+
+
+
+        function removeFromWishlist(proId) {
+
+          $.ajax({
+            url: '/remove-from-wishlist/' + proId,
+            method: 'get',
+            success: (resp) => {
+              if (resp.status) {
+                // $("#tile").load(" #tile");// relaoding just the div
+                // $("#summaryBox").load(" #summaryBox");// relaoding just the div
+                $('#wishlist-count').html(resp.wishlistCount)// reloading the badge
+                $("#tile").load(" #tile");// relaoding just the div
+              }
+
+
+            }
+
+          })
+
+
+
+        }
+
+
+        function addToCart(proId) {
+
+$.ajax({
+    url: '/add-to-cart/' + proId,
+    method: 'get',
+    success: (resp) => {
+        if (resp.status) {
+
+            $('#cart-count').html(resp.cartCount) // updates the cart label with the count in cart
+            $('#navbarScroll').load(' #navbarScroll')
+
+        }
+    }
+
+})
+
+
+
+}
+
+        
+
+      </script>
+
+
+
+
+
+
+
+      <!-- temp style -->
+      <style>
+        body {
+          background-color: #121212;
+          color: white;
+
+        }
+        #addToCart:hover {
+          border: solid 1px #69def8;
+          color: cyan;
+          background-color: black;
+
+        }
+
+        #addToCart {
+          border: solid 1px  #21ddff;
+          color: black;
+          background-color:#21ddff;
+          border-radius: 40px;
+        }
+      </style>
+
+
+
+  </body>
+
+</html>

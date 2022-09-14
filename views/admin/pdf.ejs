@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style= "   background: black;
+    position: absolute;
+    color: white;
+    padding: 1rem;
+    border-radius: 7px;">Tech shack</h1>
+
+    <div>
+        
+        <img style="background-color: white;padding: 1rem;border-radius: 10px;" src="TechShackLogo.png" alt="" height="70px">
+       
+        
+        <div style="float: right;">
+            <p >
+                Tech Shack PVT LTD <br> Kochi , Edappally <br> Ernakulam , Kerala
+            </p>
+        </div>
+    </div>
+    <hr>
+    Date : <%= ReportData.date %> 
+    <hr>
+
+    
+    <div style="margin-top: 10rem;" >
+        <div style="width: 200px;float: left;">
+
+            <h4> PAYPAL &nbsp;&nbsp; :</h4>
+            <h4> CoD &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:</h4>
+            <h4> Razorpay :</h4>
+            <h1> Total Sales - </h1>
+
+        </div>
+        
+        <div style="float: right; width: 200px;">
+
+            <h4>₹ <%= ReportData.paypal %></h4>
+            <h4>₹ <%= ReportData.cod %></h4>
+            <h4>₹ <%= ReportData.razorpay %></h4>
+            <h1>₹ <%= ReportData.Total %></h1>
+            
+        </div>
+        <div>
+            
+        </div>
+        
+    </div>
+
+    
+
+    
+    
+</body>
+<style>
+    body{
+        padding: 100px;
+
+    }
+</style>
+</html>

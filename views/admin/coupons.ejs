@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/admin-head.ejs')%>
+
+  <body>
+
+
+    <!-- home page with USERS LIST -->
+
+    <%- include('../partials/admin-navbar.ejs')%>
+      <!-- NAV END -->
+      
+
+      <!-- <div class="row p-5">
+        <div class="container">
+
+          <a href="/admin/add-category" class="btn btn-light" style="position:absolute;">Add category</a> -->
+
+
+
+
+
+
+          <section style="padding-top: 2rem;">
+            <div class="container py-5">
+                
+                <div class="row d-flex justify-content-center my-4">
+
+                  <div class="row">
+                    <div class="col-12">
+                      <h1  style="color: white;float: left;">Coupons</h1>
+
+                      <a  style="float: right;" href="/admin/add-coupon" class="btn btn-light"> New Coupon</a>
+
+                    </div>
+
+                    
+
+                  </div>
+                  
+                  
+
+                  <% if(coupons){ %> 
+
+
+                         <% coupons.forEach((el)=>{ %>
+
+
+
+                            <!-- single tile -->
+                     
+                  <div class="col-md-3" style="color:white">
+                      <h3>&nbsp;</h3>
+
+                     
+                      <div class="card mb-4" style="background-color:#121212;border-radius: 1rem;">
+                          
+                          <div class="card-header py-3" style="border: solid 1px rgb(67, 67, 67);border-radius: 1rem;">
+                              <!-- <img class="mt-2" src="/images/icons/orders-icon.png"  style="float: left;margin-right: 1rem;" alt="" height="30px" width="30px">   -->
+                              
+                              <h5 class="mb-0" style="text-align: center;" ><%= el.code  %>   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <small><%= el.percent %>% off</small> 
+                              <a style="float: right" href="/admin/delete-coupon/<%= el.code %> "><img src="/images/icons/delete.png" alt="" height="20px" ></a>
+                              </h5> 
+                             
+                             
+
+                          </div>
+
+                      </div>
+
+                    </div>
+  
+  
+  
+  
+  
+  
+          
+  
+  
+  
+                         <% }) %> 
+  
+                  <% } %> 
+
+                    
+                     
+                   
+
+
+
+                     
+                
+
+
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           
+
+  
+
+    
+
+
+
+        
+
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+      <script type="text/javascript">
+        function deleteBanner(eId) {
+          route = "/admin/delete-banner/";
+          targetURL = route + eId;
+
+          Swal.fire({
+            title: 'Are you sure you want to delete this banner?',
+            background: '#1E1E1E',
+            color: '#fff',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes I want to delete this banner!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+
+              Swal.fire({
+                title: 'deleted!',
+                text: 'The banner has been deleted.',
+                background: "#1E1E1E",
+                color: '#fff',
+                icon: 'success'
+              }
+              ).then(() => {
+                console.log("===================")
+
+                console.log(targetURL)
+                console.log(eId)
+
+                window.location.href = targetURL;// the req
+
+              })
+
+
+            }
+          })
+
+
+
+
+        }
+      </script>
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/head.ejs')%>
+
+    <body>
+        <!-- home page with products -->
+
+        <%- include('../partials/navbar.ejs')%>
+
+            <style>
+                .dark-theme {
+                    background-color: #1E1E1E;
+                    color: aliceblue;
+                    border: none;
+                }
+            </style>
+
+
+
+            <!-- product card css -->
+            <link rel="stylesheet" href="/styles/productCardStyle.css">
+            <script src="https://kit.fontawesome.com/6a3d932f86.js" crossorigin="anonymous"></script>
+            <section style="padding-top: 2rem;">
+                <div class="container py-5">
+                    <div class="row d-flex justify-content-center my-4">
+
+                        <!-- delivery details form -->
+
+                        <form class="col-md-8 " action="/place-order" method="post" id="placeOrderForm">
+
+
+                            <!-- make mutiple addres changes here -->
+
+
+                            <% if(userDoc.addresses) {%>
+
+                                <!-- <h6>adrees exists i user doc</h6> -->
+
+                                <% if(!userDoc.addresses.length==0) {%>
+
+
+                                    <div class="form-group  mb-3">
+                                        <h4>Choose an address </h4>
+
+
+                                        <!-- the radio -->
+                                        <div class="form-control dark-theme">
+
+
+
+                                        <%  for(i=0;i<userDoc.addresses.length;i++) { %>
+
+
+
+                                            <% if(i==0){ %>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="radio" name="addressObj"  value='{"address":"<%=userDoc.addresses[i].address  %>","mobile":"<%= userDoc.addresses[i].mobile %>","pincode":"<%= userDoc.addresses[i].pincode  %>" }' checked>
+                                                    <label class="form-check-label px-2" >
+                                                        <%= userDoc.addresses[i].address %>, contact: <%= userDoc.addresses[i].mobile %>, pin: <%= userDoc.addresses[i].pincode  %>  
+                                                    </label>
+                                                </div>
+
+                                               
+
+                                            <% } else { %> 
+
+
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="radio" name="addressObj"  value='{"address":"<%=userDoc.addresses[i].address  %>","mobile":"<%= userDoc.addresses[i].mobile %>","pincode":"<%= userDoc.addresses[i].pincode  %>" }'>
+                                                    <label class="form-check-label px-2" >
+                                                        <%= userDoc.addresses[i].address %>, contact: <%= userDoc.addresses[i].mobile %>, pin: <%= userDoc.addresses[i].pincode  %>  
+                                                    </label>
+                                                </div>
+
+                                            
+
+                                            <% } %>
+
+                                           
+
+
+                                        <% } %> 
+                                       
+
+                                        <a href="/user-profile/add-user-address-checkout" type="button" class="btn btn-dark">Add address</a>
+                                          
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <% }else{ %>
+
+
+
+                                        <div class="form-group  mb-3">
+                                            <h4>Enter Address </h4>
+                                            <textarea class="form-control dark-theme" id="exampleFormControlTextarea1"
+                                                rows="3" placeholder="Enter the devilery address" name="address"
+                                                required></textarea>
+                                        </div>
+
+
+
+
+
+                                        <div class="form-group  mb-3 ">
+                                            <h4>Pincode</h4>
+                                            <input class="form-control dark-theme" type="number"
+                                                placeholder="Enter pincode" name="pincode" required>
+                                        </div>
+
+
+                                        <div class="form-group  mb-3">
+                                            <h4>mobile</h4>
+                                            <input class="form-control dark-theme" type="number"
+                                                value="<%= activeUser.mobile%>" name="mobile" required>
+                                        </div>
+                                        <% } %>
+
+
+
+
+                                            <% } else{ %>
+
+                                                <!-- <h5>adreess doc il illaaa,, eee case il form venam</h5> -->
+
+                                                <div class="form-group  mb-3">
+                                                    <h4>Enter Address </h4>
+                                                    <textarea class="form-control dark-theme"
+                                                        id="exampleFormControlTextarea1" rows="3"
+                                                        placeholder="Enter the devilery address" name="address"
+                                                        required></textarea>
+                                                </div>
+
+
+
+
+
+                                                <div class="form-group  mb-3 ">
+                                                    <h4>Pincode</h4>
+                                                    <input class="form-control dark-theme" type="number"
+                                                        placeholder="Enter pincode" name="pincode" required>
+                                                </div>
+
+
+                                                <div class="form-group  mb-3">
+                                                    <h4>mobile</h4>
+                                                    <input class="form-control dark-theme" type="number"
+                                                        value="<%= activeUser.mobile%>" name="mobile" required>
+                                                </div>
+
+
+                                                <% } %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    <!-- make mutiple addres changes here -->
+
+
+
+
+
+
+                                                    <!-- =================== -->
+
+
+                                                    <div id="summaryBox" class="card mb-4"
+                                                        style="background-color:#1E1E1E;">
+                                                        <div class="card-header py-3"
+                                                            style="border-bottom: solid 1px rgb(67, 67, 67);">
+                                                            <h5 class="mb-0">Summary</h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <ul class="list-group list-group-flush">
+
+
+
+
+                                                                <% products.forEach((element)=> { %>
+
+                                                                    <li class="list-group-item d-flex justify-content-between align-items-center px-0"
+                                                                        style="background-color:#1E1E1E;color: white;">
+                                                                        <%=element.product[0].name%>
+                                                                            <span> ₹ <%=element.product[0].price%> ( x
+                                                                                    <%= element.quantity%> )</span>
+                                                                    </li>
+
+
+
+                                                                    <% }) %>
+
+
+
+                                                                        <li class="list-group-item d-flex justify-content-between align-items-center px-0"
+                                                                            style="background-color:#1E1E1E;color: white;">
+                                                                            Shipping cost
+                                                                            <span>free</span>
+                                                                        </li>
+
+
+
+
+                                                                    <% if(offer){ %> 
+                                                                        <li class="list-group-item d-flex justify-content-between align-items-center px-0"
+                                                                        style="background-color:#1E1E1E;color: white;">
+                                                                        Coupon (flat <%= offer.off %>% off )
+                                                                        <span> - ₹ <%= offer.amt %> </span>
+                                                                        </li>
+                                                                    <% } %> 
+
+
+                                                                    <% if(supercoinOffer){ %> 
+                                                                        <li class="list-group-item d-flex justify-content-between align-items-center px-0"
+                                                                        style="background-color:#1E1E1E;color: white;">
+                                                                        Supercoins 
+                                                                        <span> - ₹ <%=supercoinOffer.coins  %> </span>
+                                                                        </li>
+                                                                    <% } %> 
+
+
+                                                                        <!--                                                     
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center px-0"
+                                                        style="background-color:#1E1E1E;color: white;">
+                                                        Choose a Payment method :
+
+                                                        
+                                                        
+                                                        
+                                                        
+                                                    </li>
+
+
+
+
+                                                    <li class="list-group-item  px-0"
+                                                        style="background-color:#1E1E1E;color: white;">
+                                                        
+
+                                                        
+
+                                                            <div class="form-check" style="">
+                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                                  Default radio
+                                                                </label>
+
+
+                                                                
+                                                            </div>
+
+
+
+                                                              <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                                  Default checked radio
+                                                                </label>
+                                                              </div>
+
+                                                            
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                    </li> -->
+
+
+
+
+                                                                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3"
+                                                                            style="background-color:#1E1E1E;color: white;">
+                                                                            <div>
+                                                                                <strong>Total amount</strong>
+
+                                                                            </div>
+
+                                                                            <span><strong> ₹ <%=totalAmountCart
+                                                                                        %>
+                                                                                </strong></span>
+
+
+
+                                                                        </li>
+                                                            </ul>
+
+
+                                                        </div>
+                                                    </div>
+
+
+
+
+
+                                                    <!-- coupons code --- -->
+
+                                                    <% if(!offer){ %> 
+
+                                                    <div class="form-group  mb-3 " id="applyCouponField">
+                                                        
+                                                        <div class="input-group mb-3">
+                                                            <input type="text" class="form-control dark-theme" placeholder="Enter Coupon code" aria-label="Recipient's username" aria-describedby="button-addon2"
+                                                             id="offInput">
+                                                            <button class="btn btn-outline-secondary" type="button" id="applyBtn" style="border:none;background-color: #0d6efd;color: white;">Apply</button>
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                    <% } %> 
+
+
+
+
+                                                    <!-- coupon section end -->
+
+
+
+
+                                                    <!-- supercoins section -->
+
+                                                    <% if(userDoc.supercoins){ %> 
+
+                                                        <% if(userDoc.supercoins > 0){ %> 
+
+                                                        <div class="form-group  mb-3 " id="applyCoinField">
+                                                            
+                                                            <div class="input-group mb-3">
+                                                                
+                                                               <div class="dark-theme col-12" style="padding: 1rem;border-radius: 10px;">
+
+                                                                    <div>
+                                                                        <img src="/images/icons/rupee-coin.png" alt="" style="height: 30px;margin-right: 0.3rem; margin-bottom: 0.3rem;"> <b> <span id="supercoins"><%= userDoc.supercoins %></span> Supercoins available   </b> 
+                                                                        <br> 
+                                                                        <small > You can pay ₹<%= userDoc.supercoins %> with supercoins..</small> 
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                 
+
+                                                                  <button id="redeemCoin" style="border-radius: 20px;margin-top: 1rem;" type="button" class="btn btn-warning"> Click to Redeem</button>
+                                                                   
+
+                                                                  
+                                                               </div>
+
+                                                            </div>
+    
+    
+    
+                                                        </div>
+
+                                                        <% }  %> 
+
+
+                                                           
+    
+                                                    <% } %> 
+    
+                                                        
+
+
+                                                    <!-- supercoins section  end-->
+
+
+
+
+
+                                                    <!-- payment method radio -->
+
+                                                    <div class="form-group  mb-3 " id="methods-div">
+                                                        <h4>Payment method</h4>
+                                                        <!-- <input class="" type="radio" id="" name="" value="HTML"> -->
+
+
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="payment-method" value="COD"
+                                                                id="flexRadioDefault1">
+                                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                                Cash on delivery
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="payment-method" value="RAZORPAY"
+                                                                id="flexRadioDefault2" checked>
+                                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                                RazorPay
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="payment-method" value="PAYPAL"
+                                                                id="flexRadioDefault3">
+                                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                                PayPal
+                                                            </label>
+                                                        </div>
+
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+
+
+
+                                                    <button id="placeOrderBtn" type="submit"
+                                                        class="btn btn-primary mb-2" style="width: 100%;">Place
+                                                        order</button>
+
+
+
+
+                                                    <!-- Set up a container element for the button -->
+                                                    <div id="paypal-button-container" style="display: none;"></div>
+
+
+
+
+
+
+
+
+
+
+
+                        </form>
+
+
+
+
+
+
+
+
+
+
+            </section>
+
+
+
+
+
+
+
+
+
+            <!-- product cards end -->
+
+
+
+
+
+
+
+
+            <!-- j query link -->
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+
+
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+
+
+            <!-- 
+            script of paypal button and radio -->
+            <script>
+                $('#flexRadioDefault3').click(function () {
+                    if ($('#flexRadioDefault3').is(':checked')) {
+                        //input where you put a value
+                        // $('#program').val("radio-button-text");
+                        $("#paypal-button-container").css("display", "block");
+                        $("#placeOrderBtn").css("display", "none");
+                    }
+                });
+
+                $('#flexRadioDefault2').click(function () {
+
+                    $("#paypal-button-container").css("display", "none");
+                    $("#placeOrderBtn").css("display", "block");
+
+                });
+                $('#flexRadioDefault1').click(function () {
+
+                    $("#paypal-button-container").css("display", "none");
+                    $("#placeOrderBtn").css("display", "block");
+
+                });
+
+
+
+                //  coupon  function
+
+
+                $('#applyBtn').click(function () {
+
+                    var offcode = $("#offInput").val();
+                    
+                    $.ajax({
+                        type:"POST",
+                        url: "/apply-coupon",
+                        data:{
+                            code:offcode
+                        },
+                        success:(resp)=>{
+                            if(resp.status){
+                                $("#summaryBox").load(" #summaryBox")
+                                $("#applyCouponField").load(" #applyCouponField")
+                                
+                                alert('success aayii')
+
+                            }else{
+                                Swal.fire(resp.msg)
+                            }
+                        }
+
+                    })
+
+
+
+
+                });
+
+
+
+                
+                // supercoin function
+
+
+                
+                $('#redeemCoin').click(function () {
+
+
+                   
+
+                    $.ajax({
+                        type:"POST",
+                        url: "/apply-supercoin",
+                        success:(resp)=>{
+
+                            if(resp.status){
+                                Swal.fire("superCoins redeemed successfully!")
+                                $("#summaryBox").load(" #summaryBox")
+                                $("#applyCoinField").load(" #applyCoinField")
+                                // alert('success aayii')
+
+                            }else{
+                                Swal.fire("something went wrongg")
+                            }
+                        }
+
+                    })
+
+
+
+
+                });
+
+
+
+
+
+
+
+            </script>
+
+
+
+
+
+
+
+
+
+            <script>
+
+
+                $("#placeOrderForm").submit((e) => {
+                    e.preventDefault();
+                    $.ajax({
+                        url: '/place-order',
+                        method: 'post',
+                        data: $("#placeOrderForm").serialize(),
+                        success: (response => { // for now just alert cheyth vech
+                            console.log(response)
+                            if (response.paymentMethod == 'COD') {
+
+
+                                Swal.fire(
+
+                                    'placed!!',
+                                    'Your order has been placed!',
+                                    'success'
+                                ).then(() => {
+                                    location.href = '/user-profile/user-orders';
+
+                                }
+
+
+                                )
+
+
+                            } else {
+                                razor(response)
+                            }
+                        })
+
+                    })
+                })
+
+
+
+                ///
+
+                function razor(order) {
+                    console.log("razor ethi")
+                    var options = {
+                        "key": "rzp_test_VjcTBASa2eOF2E", // Enter the Key ID generated from the Dashboard
+                        "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                        "currency": "INR",
+                        "name": "Acme Corp",
+                        "description": "Test Transaction",
+                        "image": "https://example.com/your_logo",
+                        "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                        "handler": function (response) {
+
+
+                            verifyRazorpay(response, order);
+                        },
+                        "prefill": {
+                            "name": "Gaurav Kumar",
+                            "email": "gaurav.kumar@example.com",
+                            "contact": "9999999999"
+                        },
+                        "notes": {
+                            "address": "Razorpay Corporate Office"
+                        },
+                        "theme": {
+                            "color": "#3399cc"
+                        }
+                    };
+                    var rzp1 = new Razorpay(options);
+                    rzp1.open();
+
+                }
+
+
+
+                ///
+
+                function verifyRazorpay(payment, order) {
+
+                    console.log("veryfyy razorpay ethi")
+                    $.ajax({
+                        url: '/verifyRazorpay',
+                        method: 'post',
+                        data: {
+                            payment,
+                            order
+                        },
+                        success: (response) => {
+                            if (response.status) {
+
+                                Swal.fire(
+
+                                    'placed!!',
+                                    'Your order has been placed!',
+                                    'success'
+                                ).then(() => {
+                                    location.href = '/user-profile/user-orders';
+
+                                }
+
+
+                                )
+
+                            }
+                        }
+
+
+                    })
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+                ///////// razor over 
+
+
+
+
+
+
+
+
+
+
+                ///////// paypall code
+
+
+
+
+
+
+
+                //  u r not using these scripts here.. copied it while coping a page
+
+            //     function removeFromCart(proId) {
+
+            //         $.ajax({
+            //             url: '/remove-cart-item/' + proId,
+            //             method: 'get',
+            //             success: (resp) => {
+            //                 if (resp.status) {
+            //                     $("#tile").load(" #tile");// relaoding just the div
+            //                     $("#summaryBox").load(" #summaryBox");// relaoding just the div
+            //                     $('#cart-count').html(resp.cartCount)// reloading the badge
+            //                 }
+
+
+            //             }
+
+            //         })
+
+
+
+            //     }
+
+
+            //     function changeQuantity(cartId, proId, num) {
+
+
+            //         $.ajax({
+            //             url: '/change-product-quantity',
+            //             data: {
+            //                 cartId: cartId,
+            //                 proId: proId,
+            //                 count: num
+
+            //             },
+            //             method: 'post',
+            //             success: (resp) => {
+            //                 if (resp.status) {
+            //                     $("#tile").load(" #tile");// relaoding just the div
+            //                     $("#summaryBox").load(" #summaryBox");// relaoding just the div
+
+            //                 }
+
+
+            //             }
+
+            //         })
+            //     }
+
+            // 
+
+
+            </script>
+
+
+
+
+            <!-- Replace "test" with your own sandbox Business account app client ID -->
+            <script
+                src="https://www.paypal.com/sdk/js?client-id=AatPnsCOn7N6-dP6gssri_F1h-TBd_XOWUpi5rFoLSr2XyGaSFgVK70bBjaHfYHLxNcXodnT2fBvgDIh&currency=USD"></script>
+
+
+
+
+            <script>
+                /// pay pal script
+
+
+
+                const amtVal = '<%-totalAmountCart %>'
+
+                paypal.Buttons({
+                    // Sets up the transaction when a payment button is clicked
+                    createOrder: (data, actions) => {
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: amtVal // Can also reference a variable or function
+                                }
+                            }]
+                        });
+                    },
+                    // Finalize the transaction after payer approval
+                    onApprove: (data, actions) => {
+                        return actions.order.capture().then(function (orderData) {
+                            // Successful capture! For dev/demo purposes:
+                            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                            const transaction = orderData.purchase_units[0].payments.captures[0];
+
+
+                            $.ajax({
+                                url: '/place-order',
+                                method: 'post',
+                                data: $("#placeOrderForm").serialize(),
+                                success: (response => { // for now just alert cheyth vech
+                                    if (response.paymentMethod == 'DIRECT') {
+
+
+                                        Swal.fire(
+
+                                            'placed!!',
+                                            'Your order has been placed!',
+                                            'success'
+                                        ).then(() => {
+                                            location.href = '/user-profile/user-orders';
+
+                                        }
+
+
+                                        )
+
+
+                                    } else {
+                                        razor(response)
+                                    }
+                                })
+
+                            })
+
+
+                            $("#paypal-button-container").css("display", "none");// modifications  methods-div
+                            $("#methods-div").css("display", "none");
+                            $("#placeOrderBtn").html("Finish checkout");
+                            $("#placeOrderBtn").css("display", "block");
+
+                        });
+                    }
+                }).render('#paypal-button-container');
+            </script>
+
+
+
+
+
+
+            <!-- temp style -->
+            <style>
+                body {
+                    background-color: #121212;
+                    color: white;
+
+                }
+            </style>
+
+
+
+    </body>
+
+</html>

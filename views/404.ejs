@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <a href="/"><img id="logo" style="height: 50px;margin-top: 10px !important;" src="/images/TechShackLogo.png"></a>
+
+
+
+    <div class="scene">
+
+        <div class="box">
+            <div class="box__face front">4</div>
+            <div class="box__face back">0</div>
+            <div class="box__face right">4</div>
+            <div class="box__face left">0</div>
+            <div class="box__face top"><img style="padding-top: 2rem;" src="/images/TechShackLogomini.png" height="150px"alt=""></div>
+            <div class="box__face bottom">0</div>
+        </div>
+        <div class="shadow"></div>
+    </div>
+    <div class="desc">
+
+        <a href="/">BACK TO HOME PAGE</a>
+    </div>
+
+</body>
+
+
+<style>
+    #logo {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999;
+
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        font-family: "Days One", sans-serif;
+    }
+
+    body {
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        background-color: #121212;
+        background-image: url();
+    }
+    a{
+        text-decoration: none;
+    }
+
+    .scene {
+        perspective: 400px;
+    }
+
+    .box {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        transform-style: preserve-3d;
+        transform: translateZ(-100px);
+        transition: 0.3s;
+        animation-name: rotateAnimation;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+    }
+
+    .box__face {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        font-size: 120px;
+        line-height: 200px;
+        text-align: center;
+        color: #fff;
+        border: 1px solid #000;
+    }
+
+    .box__face.front {
+        transform: rotateY(0deg) translateZ(100px);
+        background: #383838;
+    }
+
+    .box__face.back {
+        transform: rotateY(90deg) translateZ(100px);
+        background: #202020;
+    }
+
+    .box__face.right {
+        transform: rotateY(180deg) translateZ(100px);
+        background: #0e0e0e;
+    }
+
+    .box__face.left {
+        transform: rotateY(-90deg) translateZ(100px);
+        background: black;
+    }
+
+    .box__face.top {
+        transform: rotateX(90deg) translateZ(100px);
+        background: #161616;
+    }
+
+    .box__face.bottom {
+        transform: rotateX(-90deg) translateZ(100px);
+        background: black;
+    }
+
+    @keyframes rotateAnimation {
+        25% {
+            transform: translateZ(-100px) rotateY(-90deg);
+        }
+
+        50% {
+            transform: translateZ(-100px) rotateY(-180deg);
+        }
+
+        75% {
+            transform: translateZ(-100px) rotateX(-90deg);
+        }
+
+        85% {
+            transform: translateZ(-100px) rotateX(-90deg);
+        }
+    }
+
+    .shadow {
+        position: absolute;
+        z-index: -1;
+        left: -50px;
+        top: calc(100% - 20px);
+        width: calc(100% + 100px);
+        height: 30px;
+        border-radius: 50%;
+        background: #000;
+        filter: blur(20px);
+    }
+
+    .desc {
+        margin-top: 60px;
+        text-align: center;
+    }
+
+    .desc h2 {
+        margin: 0;
+        font-size: 26px;
+    }
+
+    .desc a {
+        border: 2px solid grey;
+        background: transparent;
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 13px;
+        font-family: "Days One", sans-serif;
+        box-shadow: 4px 4px 0 0px rgba(19, 13, 26, 0.5);
+        position: relative;
+        transition: 0.3s;
+        outline: none;
+        cursor: pointer;
+        border-radius: 0 20px;
+        overflow: hidden;
+        color: grey;
+    }
+
+    .desc a:after {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 0;
+        content: "";
+        background: black;
+        transition: 0.3s;
+        z-index: -1;
+    }
+
+    .desc a:hover {
+        color: rgb(0, 217, 255);
+        letter-spacing: 2px;
+
+    }
+
+    .desc a:hover:after {
+        height: 100%;
+    }
+
+    .desc a:active {
+        box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.5);
+    }
+</style>
+
+</html>

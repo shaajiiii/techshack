@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/head.ejs')%>
+
+    <body>
+        <!-- home page with products -->
+
+        <%- include('../partials/navbar.ejs')%>
+            <section style="color: #fff;padding-top: 7rem;">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-12 col-md-3 m-5">
+                            <% if(userDetails.image){ %> 
+                            <img src="/user-images/<%=userDetails._id %>.png" alt="" style="height:18rem; width:18rem">
+
+                            <%} else{ %> 
+
+                            <img src="/images/icons/user_icon_white.png" alt="" style="height:18rem; width:18rem">
+
+                            <% } %> 
+                        </div>
+
+                        <div class="col-12 col-md-8 mt-4">
+                            <h2 class="text-center"> Edit Your Details </h2>
+
+                            <form action="/user-profile/edit-user-profile" method="post"
+                                enctype="multipart/form-data">
+
+                                <label for="">Name</label>
+                                <input type="text" name="username" class="form-control"
+                                    placeholder="" value="<%= userDetails.username %>">
+
+                                <label for="">E-mail</label>
+                                <input type="email" name="email" class="form-control"
+                                    placeholder="" value="<%= userDetails.email %>">
+
+                               
+
+                                <label for="">Mobile</label>
+                                <input type="number" name="mobile" class="form-control"
+                                    placeholder="" value="<%= userDetails.mobile %>">
+
+                                <% if(!userDetails.image){ %> 
+                                    
+                                    <label for="">Image</label>
+                                    <input type="file" name="image" class="form-control">
+            
+                                <%} %> 
+
+                                
+
+
+                                <button type="submit" class="btn btn-success mt-4">submit</button>
+
+
+
+
+                            </form>
+
+
+                        </div>
+                        
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+            <style>
+                body {
+                    background-color: #121212;
+                    color: white;
+
+                }
+            </style>
+
+
+
+    </body>
+
+</html>

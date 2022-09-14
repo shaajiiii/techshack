@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/admin-head.ejs')%>
+
+  <body>
+
+
+    <!-- admin page with ADD PRODUCT FORM -->
+
+    <%- include('../partials/admin-navbar.ejs')%>
+      <!-- NAV END -->
+
+
+      
+     
+
+    <section style="color: #fff;">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-8 mt-4">
+
+
+
+            <h2 class="text-center"> Offers </h2>
+
+
+
+            
+
+              <div class="row">
+                    <img  class="col-md-6 col-12" src="/product-images/<%= product._id %>.png " height="" alt="">
+
+                    
+                <div class="col-md-5 mt-5">
+                  <h5 ><%= product.name %> </h5>
+                  <h6 class="mb-5"><%= product.brand %></h6>
+                  <span>MRP : <%= product.mrp %> </span> <br>
+                  <span>Price now : <%= product.price %> </span> <br>
+                  <% if (product.offer){ %> 
+
+
+                    <span>Offer percent : <%= product.offerPercent %> % </span> <br>
+                    <span>Discount Amount :  <%= product.offValue %>  </span> <br>
+                    
+
+
+                  <% } %> 
+
+
+
+                  
+
+
+
+                  <% if (!product.offer){ %> 
+
+
+                  <h6 id="noOfferMsg" style="color:gold;" class="mt-3">No offers applied on this product</h6>
+
+
+
+                  <% } else { %> 
+
+                    <h6 style="color:rgb(3, 185, 3);" class="mt-3"> Product is on active offer</h6>
+                    
+                   
+                  
+                    
+                    
+
+
+                    
+                  <% } %> 
+
+
+                  <form class="mt-3" id="offerForm" action="/admin/apply-offer" method="post" enctype="multipart/form-data" style="display: none;">
+
+                    <!-- <label for="">Offer percentage</label> -->
+                    <input type="number" name="offerpercent" placeholder="Enter percent to put on offer" class="form-control" required> 
+
+                    <input type="text" name="proId" value="<%= product._id %>" hidden>
+      
+                  
+      
+                    
+                    <img id="offerFormCancelBtn" class="mt-4" src="/images/icons/x-button.png" height="50px" alt="">
+
+                    <!-- <button id="offerFormCancelBtn" class="btn btn-light mt-4" style="margin-left: auto;">cancel</button> -->
+      
+      
+                    <button type="submit" style="float: right;background: none;border: none;" class="mt-4"><img src="/images/icons/checked.png" height="50px" alt=""></button>
+      
+      
+      
+      
+                  </form>
+
+
+
+
+
+                  <button id="new-offer" style="border: none;" type="button" class="btn " title="Add new offer">  <img src="/images/icons/new-offer.png" height="50px" alt=""> </button>
+
+                  <% if(product.offer){ %> 
+
+                    <a href="/admin/delete-offer/<%= product._id %>" id="deleteOffersBtn" style="border: none;" type="button" class="btn " data-toggle="tooltip" title="Delete all offers">  <img src="/images/icons/blue-delete.png" height="50px" alt=""> </a>
+
+
+                    <% } %> 
+                </div>
+                       
+                      
+
+                  
+                    
+                   
+
+              </div>
+
+           
+
+
+            <!-- offers form (m offer indel ee block display aavum) -->
+
+           
+
+            <!-- offers form end -->
+
+
+
+            
+
+
+
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+
+    </section>
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+
+
+           $('#new-offer').click(function () {
+                   
+                   $("#offerForm").css("display", "block");
+                   $("#new-offer").css("display", "none");
+                   $("#noOfferMsg").css("display", "none");
+                   $("#deleteOffersBtn").css("display", "none");
+
+               
+           });
+  
+          
+
+
+           
+           $('#offerFormCancelBtn').click(function () {
+                   
+                   $("#offerForm").css("display", "none");
+                   $("#new-offer").css("display", "inline");
+                   $("#noOfferMsg").css("display", "block");
+                   $("#deleteOffersBtn").css("display", "inline");
+                   
+               
+           });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+
+</html>

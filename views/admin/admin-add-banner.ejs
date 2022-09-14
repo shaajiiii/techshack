@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/admin-head.ejs')%>
+
+  <body>
+
+
+    <!-- admin page with ADD PRODUCT FORM -->
+
+    <%- include('../partials/admin-navbar.ejs')%>
+      <!-- NAV END -->
+
+
+      
+     
+
+    <section style="color: #fff;">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-8 mt-4">
+            <h2 class="text-center"> Add new banner </h2>
+
+            <form action="/admin/add-banner" method="post" enctype="multipart/form-data">
+
+              <label for="">Banner name</label>
+              <input type="text" name="bannerName" placeholder="Give a name for the banner for easier identification" class="form-control" required>
+
+            
+
+              <label for="">Image</label>
+              <input type="file" name="image" class="form-control" required>
+
+              <a href="/admin/banners" class="btn btn-light mt-4" style="margin-left: auto;">cancel</a>
+
+
+              <button type="submit" style="float: right;" class="btn btn-info mt-4"> Confirm</button>
+
+
+
+
+            </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+     
+
+
+
+
+
+
+        
+        
+
+
+         
+
+      </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,120 @@
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark" style="
+box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+z-index: 15;background-color:#121212 !important; border-bottom:solid #121212 1px !important;position: fixed;top: 0;width: 100%;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img style="height: 50px;" src="/images/TechShackLogo.png" alt="">  </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+            aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+
+                <% if(searchKey){ %> 
+                
+
+                <li class="nav-item dropdown " >
+                    <a class="nav-link  mx-5" href="#" id="navbarScrollingDropdown"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+
+                        <img src="/images/icons/filter.png" height="30px" alt="">
+
+
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                        <li><a id="accending" class="dropdown-item filers" href="/search/<%= searchKey %>/ascending" > low to high</a></li>
+                        <li><a id="deccending" class="dropdown-item filers" href="/search/<%= searchKey %>/decending"> high to low</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+
+                <% } %> 
+
+            </ul>
+
+
+
+            <!-- search -->
+
+            <form action="/search" class="d-flex" role="search"  method="post">
+                <% if(searchKey){ %> 
+                    <input id="searchInput" value="<%= searchKey %> " class="form-control me-2 " type="search" style="border-radius: 20px;" placeholder="Search" aria-label="Search" name="key">
+                <% }else{ %> 
+                    <input id="searchInput"  class="form-control me-2 " type="search" style="border-radius: 20px;" placeholder="Search" aria-label="Search" name="key">
+                <% } %>
+
+                <button id="" class="btn btn-dark searchIcon"  style="border-radius: 2rem;" type="submit"> <img src="/images/icons/searchIcon.png" height="20px" alt=""> </button>
+            </form>
+
+                <!-- search end -->
+
+           <style>
+            /* #searchInput:focus + .searchIcon{
+                visibility: visible;
+                opacity: 1;
+
+            }
+
+          
+
+            .searchIcon{
+                
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility 0s, opacity 0.5s linear;
+                
+
+            } */
+           </style>
+
+
+
+            <ul class="navbar-nav  my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <% if(!userLoggedIn){   %>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link active " aria-current="page" href="/user-login">Login</a>
+                    </li>
+                    
+                 <%  } else{ %>
+                    <li class="nav-item">
+                        <a class="nav-link active " aria-current="page" href="/user-logout">Logout</a>
+                    </li>
+
+
+
+                 <%  } %>
+               
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/wishlist"><img src="/images/icons/heart_icon_white.png" alt="" style="width:30px ;height:30px">
+                        <% if(wishlistCount) { %> 
+                            <span class="badge" style="background-color:red ;" id="wishlist-count"><%= wishlistCount %> </span>
+                            <% } %> 
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/cart"><img src="/images/icons/cart-white.png" alt="" style="width:30px ;height:30px">
+                        <% if(cartCount) { %> 
+                        <span class="badge" style="background-color:red ;" id="cart-count"><%= cartCount %> </span>
+                        <% } %> 
+                    </a>
+                    
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/user-profile"><img src="/images/icons/user_icon_white.png" alt="" style="width:30px ;height:30px"></a>
+                </li>
+            </ul>
+
+
+
+        </div>
+    </div>
+</nav>
+
+
+<div style="background-color: rgba(0, 0, 0, 0);height: 3rem;">
+
+

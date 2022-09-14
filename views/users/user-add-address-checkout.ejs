@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/head.ejs')%>
+
+    <body>
+        <!-- home page with products -->
+
+        <%- include('../partials/navbar.ejs')%>
+            <section style="color: #fff;padding-top: 7rem;">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-12 col-md-3 mb-4 align-middle">
+
+                            <h2 class=""> Hey <%= userDetails.username %>,<br> Add your new delivery address here  </h2>
+
+                            <!-- <% if(userDetails.image){ %> 
+                            <img src="/user-images/<%=userDetails._id %>.png" alt="" style="height:18rem; width:18rem">
+
+                            <%} else{ %> 
+
+                            <img src="/images/icons/user_icon_white.png" alt="" style="height:18rem; width:18rem">
+
+                            <% } %>  -->
+                        </div>
+
+                        <div class="col-12 col-md-8 ">
+                          
+
+                            <form action="/user-profile/user-add-address-checkout" method="post"
+                                enctype="multipart/form-data">
+
+
+
+                                <div class="form-group  mb-3">
+                                    
+                                    <textarea style="border-radius:10px 20px 30px 40px ;padding-left: 2rem;" class="form-control dark-theme" id="exampleFormControlTextarea1"
+                                        rows="3" placeholder="Enter a new devilery address" name="address"
+                                        required></textarea>
+                                </div>
+
+                               
+                                <div class="form-group  mb-3 ">
+                                    
+                                    <input style="border-radius:10px 20px 30px 40px ;padding-left: 2rem;" class="form-control dark-theme" type="number"
+                                        placeholder="Enter the pincode" name="pincode" required>
+                                </div>
+
+
+                                <div class="form-group  mb-3">
+                                    
+                                    <input style="border-radius:10px 20px 30px 40px  ;padding-left: 2rem;" class="form-control dark-theme" type="number"
+                                    placeholder="Mobile"  name="mobile" required>
+                                </div>
+
+
+                            
+
+                                
+
+
+                                <button style="float: right; border-radius: 20px 40px  ;" type="submit" class="btn btn-success mt-4">submit</button>
+
+
+
+
+                            </form>
+
+
+                        </div>
+                        
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+            <style>
+                body {
+                    background-color: #121212;
+                    color: white;
+
+                }
+            </style>
+
+
+
+    </body>
+
+</html>

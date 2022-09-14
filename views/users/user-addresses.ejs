@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/head.ejs')%>
+
+    <body>
+        <!-- home page with products -->
+
+        <%- include('../partials/navbar.ejs')%>
+            <!-- product card css -->
+            <link rel="stylesheet" href="/styles/productCardStyle.css">
+            <script src="https://kit.fontawesome.com/6a3d932f86.js" crossorigin="anonymous"></script>
+
+
+
+            <section style="padding-top: 2rem;">
+                <div class="container py-5">
+                    
+                    <div class="row d-flex justify-content-center my-4">
+
+                        
+                         <div class="col-12  ">
+                            <h3 class="mb-5" style="float: left;"> Addresses</h3>
+                         </div>
+
+
+        <% if(userDetails.addresses ){ %>
+
+
+                         <% if(userDetails.addresses.length == 0  ){ %>
+
+
+                            <div class="col-12  d-flex justify-content-center">
+
+
+                                <h3 style="text-align: center;"><img src="/images/icons/no-address.png"  style="height: 20rem;"> <br>
+                
+                                No Address Found</h3>
+                                    
+                                
+                                
+                             </div>
+
+                        <% }else{ %> 
+
+
+                        
+                         
+                 
+ 
+
+
+                         <% userDetails.addresses.forEach((address)=>{ %>
+
+
+
+                             
+                         <!-- single tile -->
+
+
+                          <div class="col-md-4" style="text-decoration: none;color:white">
+                           
+
+                           
+                            <div class="card mb-4" style="background-color:#121212;border-radius: 1rem;">
+                                
+                                <div class="card-header py-3" style="border: solid 1px rgb(67, 67, 67);border-radius: 1rem;">
+                                    
+                                    
+                                    <h5 class="mb-0" style="float: left;">Delivery Address</h5> <br>
+                                    <div style="border: solid 1px rgb(67, 67, 67);border-radius: 1rem;padding: 1rem;margin-top: 0.6rem;margin-bottom: 1rem;" > 
+                                    <small class="mb-2"><%= address.address  %> </small>  </div>
+
+
+
+                                    <h5 class="mb-0" style="float: left;">Pincode</h5> <br>
+                                    <div style="border: solid 1px rgb(67, 67, 67);border-radius: 1rem;padding: 1rem;margin-top: 0.3rem;margin-bottom: 1rem;" > 
+                                    <small class="mb-2"> <%= address.pincode %>  </small>  </div>
+
+
+                                    <h5 class="mb-0" style="float: left;">Mobile</h5> <br>
+                                    <div style="border: solid 1px rgb(67, 67, 67);border-radius: 1rem;padding: 1rem;margin-top: 0.3rem;margin-bottom: 1rem;" > 
+                                    <small class="mb-2"> <%= address.mobile %></small>  </div>
+
+                                    <a style="float: right" href="/user-profile/delete-address/<%=  address.address   %> "><img src="/images/icons/delete.png" alt="" height="20px" ></a>
+
+                                   
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+                         <%  }) %> 
+
+
+
+                         <% } %> 
+
+            <% } else { %>
+
+
+
+               <!-- no address field in document-->
+
+                
+               <div class="col-12  d-flex justify-content-center">
+
+
+                
+
+
+                <h3 style="text-align: center;"><img src="/images/icons/no-address.png"  style="height: 20rem;"> <br>
+
+                No Address Found</h3>
+                    
+                
+                   
+                
+             </div>
+
+               
+
+
+
+
+             <%  } %>
+
+                         
+
+
+                    
+                    <div class="col-12  d-flex justify-content-center">
+
+
+                        <a id="addAddressBtn" href="/user-profile/user-add-address" class="btn btn-info mt-3 col-11 col-md-2" style="text-decoration: none;color:white">
+                            
+                            add address 
+                           
+                        </a>
+                    </div>
+
+
+
+
+
+
+
+                    </div>
+
+
+                </div>
+            </section>
+
+
+
+
+
+
+
+            <!-- j query link -->
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+            <!-- temp style -->
+            <style>
+                body {
+                    background-color: #121212;
+                    color: white;
+
+                }
+               
+                #addAddressBtn:hover {
+                    background-color: #121212;
+                    color: white;
+
+                }
+
+            </style>
+
+
+
+    </body>
+
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/head.ejs')%>
+
+    <body>
+        <!-- home page with products -->
+
+        <%- include('../partials/navbar.ejs')%>
+            <!-- product card css -->
+            <link rel="stylesheet" href="/styles/productCardStyle.css">
+            <script src="https://kit.fontawesome.com/6a3d932f86.js" crossorigin="anonymous"></script>
+
+
+
+            <section style="padding-top: 2rem;">
+                <div class="container py-5">
+                    
+                    <div class="row d-flex justify-content-center my-4">
+
+                         <!-- single tile -->
+                         
+                        <a  href="/user-profile/edit-user-profile" class="col-md-4" style="text-decoration: none;color:white">
+                            <h3>My account</h3>
+
+                           
+                            <div class="card mb-4" style="background-color:#121212;border-radius: 1rem;">
+                                
+                                <div class="card-header py-3" style="border: solid 1px rgb(67, 67, 67);border-radius: 1rem;">
+                                    <img class="mt-2" src="/images/icons/edit-user-icon.png"  style="float: left;margin-right: 1rem;" alt="" height="30px" width="30px">  
+                                    
+                                    <h5 class="mb-0" style="float: left;">My profile</h5>  <br> <small>edit your profile</small> 
+                                   
+
+                                </div>
+
+                            </div>
+
+                        </a>
+
+                   
+
+
+
+                         
+                         <!-- single tile -->
+                         
+                        <a  href="/user-profile/user-orders" class="col-md-4" style="text-decoration: none;color:white">
+                            <h3>&nbsp;</h3>
+
+                           
+                            <div class="card mb-4" style="background-color:#121212;border-radius: 1rem;">
+                                
+                                <div class="card-header py-3" style="border: solid 1px rgb(67, 67, 67);border-radius: 1rem;">
+                                    <img class="mt-2" src="/images/icons/orders-icon.png"  style="float: left;margin-right: 1rem;" alt="" height="30px" width="30px">  
+                                    
+                                    <h5 class="mb-0" style="float: left;">My orders</h5>  <br> <small> view and cancel your orders</small> 
+                                   
+
+                                </div>
+
+                            </div>
+
+                        </a>
+
+
+
+                         
+                         <!-- single tile -->
+
+
+                         <a  href="/user-profile/addresses" class="col-md-4" style="text-decoration: none;color:white">
+                            <h3>&nbsp;</h3>
+
+                           
+                            <div class="card mb-4" style="background-color:#121212;border-radius: 1rem;">
+                                
+                                <div class="card-header py-3" style="border: solid 1px rgb(67, 67, 67);border-radius: 1rem;">
+                                    <img class="mt-1" src="/images/icons/address.png"  style="float: left;margin-right: 1rem;" alt="" height="40px" width="40px">  
+                                    
+                                    <h5 class="mb-0" style="float: left;">Addresses</h5>  <br> <small> view and manage your addresses</small> 
+                                   
+
+                                </div>
+
+                            </div>
+
+                        </a>
+
+
+
+
+                        <a  href="/user-profile/change-password" class="col-md-4" style="text-decoration: none;color:white">
+                            <h3>&nbsp;</h3>
+
+                           
+                            <div class="card mb-4" style="background-color:#121212;border-radius: 1rem;">
+                                
+                                <div class="card-header py-3" style="border: solid 1px rgb(67, 67, 67);border-radius: 1rem;">
+                                    <img class="mt-1" src="/images/icons/pass.png"  style="float: left;margin-right: 1rem;" alt="" height="40px" width="40px">  
+                                    
+                                    <h5 class="mb-0" style="float: left;">Change password</h5>  <br> <small> change your password</small> 
+                                   
+
+                                </div>
+
+                            </div>
+
+                        </a>
+                    
+
+                        <a  href="/user-profile/supercoins" class="col-md-4" style="text-decoration: none;color:white">
+                            <h3>&nbsp;</h3>
+
+                           
+                            <div class="card mb-4" style="background-color:#121212;border-radius: 1rem;">
+                                
+                                <div class="card-header py-3" style="border: solid 1px rgb(67, 67, 67);border-radius: 1rem;">
+                                    <img class="mt-1" src="/images/icons/coins.png"  style="float: left;margin-right: 1rem;" alt="" height="40px" width="40px">  
+                                    
+                                    <h5 class="mb-0" style="float: left;">Super Coins</h5>  <br> <small> Referral & supercoins</small> 
+                                   
+
+                                </div>
+
+                            </div>
+
+                        </a>
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+
+
+            <!-- j query link -->
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+            <!-- temp style -->
+            <style>
+                body {
+                    background-color: #121212;
+                    color: white;
+
+                }
+            </style>
+
+
+
+    </body>
+
+</html>

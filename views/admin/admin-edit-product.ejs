@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/admin-head.ejs')%>
+
+  <body>
+
+
+    <!-- admin page with ADD PRODUCT FORM -->
+
+    <%- include('../partials/admin-navbar.ejs')%>
+      <!-- NAV END -->
+
+
+      
+     
+
+    <section style="color: #fff;">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-12 col-md-8">
+            <h2 class="text-center"> Edit product</h2>
+
+            <form action="/admin/edit-product/<%= productData._id %>" method="post" enctype="multipart/form-data">
+
+              <label for="">Product name</label>
+              <input type="text" name="name" class="form-control" placeholder="<%= productData.name %>" value="<%= productData.name %>">
+
+              <label for="">Brand</label>
+              <input type="text" name="brand" class="form-control" placeholder="<%= productData.brand %>" value="<%= productData.brand %>">
+
+              <label for="">Category</label>
+              <input type="text" name="category" class="form-control" placeholder="<%= productData.category %>" value="<%= productData.category %>">
+              
+              <label for="">Price</label>
+              <input type="text" name="price" class="form-control" placeholder="<%= productData.price %>" value="<%= productData.price %>">
+              
+              <label for="">description</label>
+              <input type="text" name="description" class="form-control" placeholder="<%= productData.description %>" value="<%= productData.description %>">
+
+              <label for="">Image</label>
+              <input type="file" name="image" class="form-control">
+
+
+              <button type="submit" class="btn btn-success mt-4">submit</button>
+
+
+
+
+            </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+     
+
+
+
+
+
+
+        
+        
+
+
+         
+
+      </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+
+</html>
